@@ -10,4 +10,3 @@ Build Process / Using Babel
 ---------------------------
 
 Running `npm build` will run the client-side webpack build process and the server-side babel build process. Client code will end up in ./public/bundle.js, and server code will end up in ./lib
-  - Client-side: Babel is included in the Webpack build process
