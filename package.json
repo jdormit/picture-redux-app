@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon ./lib/app.js",
     "build": "babel ./src -d ./lib && webpack",
-    "build:watch": "babel --watch ./src -d ./lib && webpack-dev-server",
+    "build:watch": "start babel --watch ./src -d ./lib && start webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -25,6 +25,7 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "immutable": "^3.8.1",
     "mongoose": "^4.4.20",
     "react": "^15.1.0",
     "react-dom": "^15.1.0"
