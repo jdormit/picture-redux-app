@@ -26,3 +26,35 @@ The REST API is only accessible from client-side HTTP requests, not in the brows
 `POST /comments` posts a comment, specified by the request body data.
 `PUT /comments/:comment` updates a particular comment.
 `DELETE /comments/:comment` deletes a particular comment.
+
+Redux Store
+-----------
+
+The client side application state is stored in a map called the store. Here is its structure:
+
+```javascript
+{
+  user: {
+    username: String
+  },
+  pictures: [
+    {
+      url: String,
+      title: String,
+      caption: String,
+      postedBy: String,
+      datePosted: Date
+    },
+    ...
+  ],
+  comments: [
+    {
+      text: String,
+      datePosted: Date,
+      postedBy: String,
+      _picture: ObjectId
+    },
+    ...
+  ]
+}
+```
