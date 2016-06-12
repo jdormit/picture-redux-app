@@ -7,7 +7,9 @@ const pictureSchema = Schema({
   title: String,
   caption: String,
   postedBy: String,
-  datePosted: Date
+  datePosted: Date,
+  height: Number,
+  width: Number
 });
 
 export default mongoose.model('Picture', pictureSchema);
