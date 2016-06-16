@@ -46,6 +46,7 @@ The client side application state is stored in a map called the store. Here is i
       datePosted: Date
     },
     ...
+    isFetching: Boolean
   ],
   comments: [
     {
@@ -55,6 +56,7 @@ The client side application state is stored in a map called the store. Here is i
       _picture: ObjectId
     },
     ...
+    isFetching: Boolean
   ]
 }
 ```
