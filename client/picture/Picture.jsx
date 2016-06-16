@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-export default React.createClass({
+export const Picture = React.createClass({
   render: function() {
     return (
         <div>
@@ -19,3 +19,9 @@ export default React.createClass({
     );
   }
 });
+
+function mapStateToProps(state) {
+  return {
+
+  };
+}

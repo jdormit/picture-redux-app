@@ -11,6 +11,7 @@ export default React.createClass({
           <input type='text' name='url' />
           <label for='caption'>Add a Caption:</label>
           <textarea name='caption'></textarea>
+          <button onClick={this.props.PictureActions.postPicture}>Send It</button>
         </form>
       </div>
     );

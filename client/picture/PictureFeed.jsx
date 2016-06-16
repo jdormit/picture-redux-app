@@ -1,9 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-export default React.createClass({
+export const PictureFeed = React.createClass({
   render: function() {
     return (
       <div>
+        <a href='/addPicture'>Add A Picture</a>
       {this.props.pictures.map(picture => {
         <div>
           <h3>{picture.title}</h3>
@@ -14,3 +16,9 @@ export default React.createClass({
     );
   }
 });
+
+function mapStateToProps(state) {
+  pictures: state.get('pictures');
+}
+
+export const PictureFeedContainer = connect(mapStateToProps)(PictureFeed);

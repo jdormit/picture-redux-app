@@ -40668,41 +40668,55 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.PictureFeedContainer = exports.PictureFeed = undefined;
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(243);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: "PictureFeed",
+	var PictureFeed = exports.PictureFeed = _react2.default.createClass({
+	  displayName: 'PictureFeed',
 
 	  render: function render() {
 	    return _react2.default.createElement(
-	      "div",
+	      'div',
 	      null,
+	      _react2.default.createElement(
+	        'a',
+	        { href: '/addPicture' },
+	        'Add A Picture'
+	      ),
 	      this.props.pictures.map(function (picture) {
 	        _react2.default.createElement(
-	          "div",
+	          'div',
 	          null,
 	          _react2.default.createElement(
-	            "h3",
+	            'h3',
 	            null,
 	            picture.title
 	          ),
-	          _react2.default.createElement("img", { src: picture.url, width: "256", height: "192" })
+	          _react2.default.createElement('img', { src: picture.url, width: '256', height: '192' })
 	        );
 	      }),
-	      ";"
+	      ';'
 	    );
 	  }
 	});
+
+	function mapStateToProps(state) {
+	  pictures: state.get('pictures');
+	}
+
+	var PictureFeedContainer = exports.PictureFeedContainer = (0, _reactRedux.connect)(mapStateToProps)(PictureFeed);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "PictureFeed.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -40717,6 +40731,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.Picture = undefined;
 
 	var _react = __webpack_require__(2);
 
@@ -40726,7 +40741,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
+	var Picture = exports.Picture = _react2.default.createClass({
 	  displayName: 'Picture',
 
 	  render: function render() {
@@ -40772,6 +40787,10 @@
 	    );
 	  }
 	});
+
+	function mapStateToProps(state) {
+	  return {};
+	}
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Picture.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
