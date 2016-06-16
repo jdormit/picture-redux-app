@@ -38,7 +38,7 @@ The client side application state is stored in a map called the store. Here is i
     username: String
   },
   pictures: [
-    {
+    pictureId: {
       url: String,
       title: String,
       caption: String,
@@ -49,7 +49,7 @@ The client side application state is stored in a map called the store. Here is i
     isFetching: Boolean
   ],
   comments: [
-    {
+    commentId: {
       text: String,
       datePosted: Date,
       postedBy: String,
