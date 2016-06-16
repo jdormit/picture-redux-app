@@ -16,9 +16,13 @@ app.server = http.createServer(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(express.static(path.resolve('../public')));
+app.use(express.static(path.resolve('./public')))
 
-app.use('/', routes);
+app.use('/api', routes);
+
+app.get('*', function(req, res) {
+  res.sendFile(path.resolve('./public/index.html'));
+});
 
 mongoose.connect(mongoUrl);
 var db = mongoose.connection;
