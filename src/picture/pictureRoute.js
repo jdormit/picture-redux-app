@@ -1,6 +1,8 @@
 import express from 'express';
 import Picture from './PictureModel';
+import multer from 'multer';
 
+const upload = multer();
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
@@ -18,8 +20,8 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
-router.post('/', (req, res, next) => {
-  let picture = new Picture(req.body.picture);
+router.post('/', upload.array(), (req, res, next) => {
+  let picture = new Picture(req.body);
   picture.save((err, picture) => {
     if (err) return res.setStatus(500).send(err);
     res.send(picture);

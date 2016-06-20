@@ -28,6 +28,7 @@
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "mongoose": "^4.4.20",
+    "multer": "^1.1.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",

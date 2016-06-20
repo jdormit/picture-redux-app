@@ -8,15 +8,17 @@ import thunkMiddleware from 'redux-thunk';
 import 'babel-polyfill';
 import reducer from './reducer';
 import App from './app/App';
-import PictureFeed from './picture/PictureFeed';
-import Picture from './picture/Picture';
+import {PictureFeedContainer} from './picture/PictureFeed';
+import {PictureContainer} from './picture/Picture';
+import {NewPictureFormContainer} from './picture/NewPictureForm';
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 const routes =
   <Route component={App}>
-    <Route path='/' component={PictureFeed} />
-    <Route path='/pictures/:picture' component={Picture} />
+    <Route path='/' component={PictureFeedContainer} />
+    <Route path='/addPicture' component={NewPictureFormContainer} />
+    <Route path='/pictures/:picture' component={PictureContainer} />
   </Route>
 
 ReactDom.render(

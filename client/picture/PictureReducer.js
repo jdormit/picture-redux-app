@@ -1,7 +1,7 @@
 import {Map, List} from 'immutable';
 
 const initialState = Map({
-  pictures: List(),
+  pictures: [],
   isFetching: false
 });
 
@@ -16,7 +16,7 @@ export default function pictureReducer(state = initialState, action) {
       return state.set('isFetching', true);
     case 'RECEIVE_PICTURES':
       return state.update('pictures', (pictures) => {
-        return pictures.push(action.pictures)
+         return pictures.concat(action.pictures)
       }).set('isFetching', false);
   }
   return state;

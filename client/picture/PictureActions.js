@@ -14,10 +14,17 @@ export function addPicture(picture) {
 }
 
 export function postPicture(picture) {
+  console.log('posting a new picture');
   return function(dispatch) {
     dispatch(postingPicture());
-    return fetch('/api/pictures', {method: 'POST'})
-    .then(response => {dispatch(addPicture(response)});
+    return fetch('/api/picture', {
+      method: 'POST',
+       body: picture
+     })
+    .then(response => {
+      dispatch(addPicture(response))
+      window.location = '/'
+    });
   }
 }
 
@@ -36,10 +43,13 @@ export function receivePictures(pictures) {
 
 export function getPictures() {
   return function(dispatch) {
+    console.log("getting pictures");
     // dispatch a request action to set the isFetching flag
     dispatch(requestPictures());
 
-    return fetch('/api/pictures')
-      .then(response => dispatch(receivePictures(response)));
+    return fetch('/api/picture')
+      .then(response => response.json().then((pictures) =>
+        dispatch(receivePictures(pictures))
+      ));
   }
 }
