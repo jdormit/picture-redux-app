@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    './client/index.jsx'
+    './src/client/index.jsx'
   ],
   module: {
     loaders: [{

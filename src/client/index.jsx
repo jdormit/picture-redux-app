@@ -18,7 +18,7 @@ const routes =
   <Route component={App}>
     <Route path='/' component={PictureFeedContainer} />
     <Route path='/addPicture' component={NewPictureFormContainer} />
-    <Route path='/pictures/:picture' component={PictureContainer} />
+    <Route path='/pictures/:id' component={PictureContainer} />
   </Route>
 
 ReactDom.render(

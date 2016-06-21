@@ -5,6 +5,7 @@ export const Picture = React.createClass({
   render: function() {
     return (
         <div>
+        <p>{this.props.params.id}</p>
         <h2>{this.props.title}</h2>
         <img src={this.props.url} alt={this.props.title} height={this.props.height} width={this.props.width} />
         <p>{this.props.caption}</p>
@@ -25,3 +26,5 @@ function mapStateToProps(state) {
 
   };
 }
+
+export const PictureContainer = connect(mapStateToProps)(Picture);

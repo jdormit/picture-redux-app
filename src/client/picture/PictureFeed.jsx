@@ -13,7 +13,7 @@ export const PictureFeed = React.createClass({
       {Object.keys(this.props.pictures).map(picture_id =>
         <div key={picture_id}>
           <h3>{this.props.pictures[picture_id].title}</h3>
-          <a href={`/pictures/${picture_id}`}>
+          <a href={`/#/pictures/${picture_id}`}>
             <img src={this.props.pictures[picture_id].url} alt={this.props.pictures[picture_id].title} width="256" height="192" />
           </a>
         </div>

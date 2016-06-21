@@ -5,6 +5,7 @@ Starting the Server:
 -------------------
 
 `npm start` will start the server at the entry point, `./lib/index.js`, assuming `npm build` has already been run.
+The server assumes that a local instance of of MongoDB is running. Get Mongo [here](https://www.mongodb.com/) and run it with `mongod`.
 
 Build Process / Using Babel
 ---------------------------

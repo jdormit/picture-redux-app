@@ -101,7 +101,7 @@
 	  { component: _App2.default },
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _PictureFeed.PictureFeedContainer }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/addPicture', component: _NewPictureForm.NewPictureFormContainer }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/pictures/:picture', component: _Picture.PictureContainer })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/pictures/:id', component: _Picture.PictureContainer })
 	);
 
 	_reactDom2.default.render(_react2.default.createElement(
@@ -35619,12 +35619,15 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 	exports.default = pictureReducer;
 
 	var _immutable = __webpack_require__(556);
 
 	var initialState = (0, _immutable.Map)({
-	  pictures: [],
+	  pictures: {},
 	  isFetching: false
 	});
 
@@ -35632,20 +35635,36 @@
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
 	  var action = arguments[1];
 
-	  switch (action.type) {
-	    case 'POSTING_PICTURE':
-	      return state.set('isFetching', true);
-	    case 'ADD_PICTURE':
-	      return state.update('pictures', function (pictures) {
-	        return pictures.push(action.picture);
-	      }).set('isFetching', true);
-	    case 'REQUEST_PICTURES':
-	      return state.set('isFetching', true);
-	    case 'RECEIVE_PICTURES':
-	      return state.update('pictures', function (pictures) {
-	        return pictures.concat(action.pictures);
-	      }).set('isFetching', false);
-	  }
+	  var _ret = function () {
+	    switch (action.type) {
+	      case 'POSTING_PICTURE':
+	        return {
+	          v: state.set('isFetching', true)
+	        };
+	      case 'ADD_PICTURE':
+	        return {
+	          v: state.update('pictures', function (pictures) {
+	            var newPicture = {};
+	            newPicture[action.picture._id] = action.picture;
+	            return Object.assign(pictures, newPicture);
+	          }).set('isFetching', true)
+	        };
+	      case 'REQUEST_PICTURES':
+	        return {
+	          v: state.set('isFetching', true)
+	        };
+	      case 'RECEIVE_PICTURES':
+	        var pictureObject = {};
+	        action.pictures.map(function (pic) {
+	          pictureObject[pic._id] = pic;
+	        });
+	        return {
+	          v: state.mergeIn(['pictures'], pictureObject).set('isFetching', false)
+	        };
+	    }
+	  }();
+
+	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	  return state;
 	}
 
@@ -40697,6 +40716,8 @@
 	    this.props.getPictures();
 	  },
 	  render: function render() {
+	    var _this = this;
+
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -40705,16 +40726,20 @@
 	        { href: '/#/addPicture' },
 	        'Add A Picture'
 	      ),
-	      this.props.pictures.map(function (picture) {
+	      Object.keys(this.props.pictures).map(function (picture_id) {
 	        return _react2.default.createElement(
 	          'div',
-	          null,
+	          { key: picture_id },
 	          _react2.default.createElement(
 	            'h3',
 	            null,
-	            picture.title
+	            _this.props.pictures[picture_id].title
 	          ),
-	          _react2.default.createElement('img', { src: picture.url, alt: picture.title, width: '256', height: '192' })
+	          _react2.default.createElement(
+	            'a',
+	            { href: '/#/pictures/' + picture_id },
+	            _react2.default.createElement('img', { src: _this.props.pictures[picture_id].url, alt: _this.props.pictures[picture_id].title, width: '256', height: '192' })
+	          )
 	        );
 	      }),
 	      ';'
@@ -41297,7 +41322,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Picture = undefined;
+	exports.PictureContainer = exports.Picture = undefined;
 
 	var _react = __webpack_require__(2);
 
@@ -41314,6 +41339,11 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        this.props.params.id
+	      ),
 	      _react2.default.createElement(
 	        'h2',
 	        null,
@@ -41357,6 +41387,8 @@
 	function mapStateToProps(state) {
 	  return {};
 	}
+
+	var PictureContainer = exports.PictureContainer = (0, _reactRedux.connect)(mapStateToProps)(Picture);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Picture.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
