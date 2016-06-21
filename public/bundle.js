@@ -35600,10 +35600,15 @@
 
 	var _PictureReducer2 = _interopRequireDefault(_PictureReducer);
 
+	var _CommentReducer = __webpack_require__(566);
+
+	var _CommentReducer2 = _interopRequireDefault(_CommentReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = (0, _redux.combineReducers)({
-	  pictureState: _PictureReducer2.default
+	  pictureState: _PictureReducer2.default,
+	  commentState: _CommentReducer2.default
 	});
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "reducer.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -35647,7 +35652,7 @@
 	            var newPicture = {};
 	            newPicture[action.picture._id] = action.picture;
 	            return Object.assign(pictures, newPicture);
-	          }).set('isFetching', true)
+	          }).set('isFetching', false)
 	        };
 	      case 'REQUEST_PICTURES':
 	        return {
@@ -40741,8 +40746,7 @@
 	            _react2.default.createElement('img', { src: _this.props.pictures[picture_id].url, alt: _this.props.pictures[picture_id].title, width: '256', height: '192' })
 	          )
 	        );
-	      }),
-	      ';'
+	      })
 	    );
 	  }
 	});
@@ -40768,15 +40772,20 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.PictureActions = undefined;
+	exports.CommentActions = exports.PictureActions = undefined;
 
 	var _PictureActions = __webpack_require__(560);
 
 	var PictureActions = _interopRequireWildcard(_PictureActions);
 
+	var _CommentActions = __webpack_require__(565);
+
+	var CommentActions = _interopRequireWildcard(_CommentActions);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	exports.PictureActions = PictureActions;
+	exports.CommentActions = CommentActions;
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "actionIndex.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -41336,56 +41345,55 @@
 	  displayName: 'Picture',
 
 	  render: function render() {
+	    var _this = this;
+
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(
-	        'p',
-	        null,
-	        this.props.params.id
-	      ),
-	      _react2.default.createElement(
 	        'h2',
 	        null,
-	        this.props.title
+	        this.props.picture.title
 	      ),
-	      _react2.default.createElement('img', { src: this.props.url, alt: this.props.title, height: this.props.height, width: this.props.width }),
+	      _react2.default.createElement('img', { src: this.props.picture.url, alt: this.props.picture.title, height: this.props.picture.height, width: this.props.picture.width }),
 	      _react2.default.createElement(
 	        'p',
 	        null,
-	        this.props.caption
+	        this.props.picture.caption
 	      ),
 	      _react2.default.createElement(
 	        'h3',
 	        null,
 	        'Comments'
 	      ),
-	      this.props.comments.map(function (comment) {
+	      Object.keys(this.props.comments).map(function (comment_id) {
 	        _react2.default.createElement(
 	          'div',
 	          null,
 	          _react2.default.createElement(
 	            'h4',
 	            null,
-	            comment.datePosted,
+	            _this.props.comments[comment_id].datePosted,
 	            ' ',
-	            comment.postedBy,
+	            _this.props.comments[comment_id].postedBy,
 	            ' said:'
 	          ),
 	          _react2.default.createElement(
 	            'p',
 	            null,
-	            comment.text
+	            _this.props.comments[comment_id].text
 	          )
 	        );
-	      }),
-	      ';'
+	      })
 	    );
 	  }
 	});
 
-	function mapStateToProps(state) {
-	  return {};
+	function mapStateToProps(state, ownProps) {
+	  return {
+	    comments: state.commentState.get('comments'),
+	    picture: state.pictureState.get('pictures')[ownProps.params.id]
+	  };
 	}
 
 	var PictureContainer = exports.PictureContainer = (0, _reactRedux.connect)(mapStateToProps)(Picture);
@@ -41471,6 +41479,133 @@
 	var NewPictureFormContainer = exports.NewPictureFormContainer = (0, _reactRedux.connect)(null, actions.PictureActions)(NewPictureForm);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewPictureForm.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 565 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getComments = getComments;
+	exports.addComment = addComment;
+	exports.requestComments = requestComments;
+	exports.receiveComments = receiveComments;
+	exports.postComment = postComment;
+	exports.postingComment = postingComment;
+	function getComments(picture_id) {
+	  return function (dispatch) {
+	    dispatch(requestComments());
+	    return fetch('/api/comment/' + picture_id).then(function (response) {
+	      return response.json().then(function (comments) {
+	        dispatch(receiveComments(comments));
+	      });
+	    });
+	  };
+	}
+
+	function addComment(comment) {
+	  type: 'ADD_COMMENT', comment;
+	}
+
+	function requestComments() {
+	  return {
+	    type: 'REQUEST_COMMENTS'
+	  };
+	}
+
+	function receiveComments(comments) {
+	  return {
+	    type: 'RECEIVE_COMMENTS',
+	    comments: comments
+	  };
+	}
+
+	function postComment(comment) {
+	  return function (dispatch) {
+	    dispatch(postingComment());
+	    return fetch('/api/comment', {
+	      method: 'POST',
+	      body: comment
+	    }).then(function (response) {
+	      dispatch(addComment(response));
+	    });
+	  };
+	}
+
+	function postingComment() {
+	  return {
+	    type: 'POSTING_COMMENT'
+	  };
+	}
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentActions.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 566 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	exports.default = commentReducer;
+
+	var _immutable = __webpack_require__(556);
+
+	var initialState = (0, _immutable.Map)({
+	  comments: {},
+	  isFetching: false
+	});
+
+	function commentReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+
+	  var _ret = function () {
+	    switch (action.type) {
+	      case 'ADD_COMMENT':
+	        return {
+	          v: state.update('comments', function (comment) {
+	            var newComment = {};
+	            newComment[action.comment._id] = action.comment;
+	            Object.assign(comment, newComment);
+	          }).set('isFetching', false)
+	        };
+	      case 'REQUEST_COMMENTS':
+	        return {
+	          v: state.set('isFetching', true)
+	        };
+	      case 'RECEIVE_COMMENTS':
+	        var commentsObject = {};
+	        action.comments.map(function (comment) {
+	          commentsObject[comment._id] = comment;
+	        });
+	        return {
+	          v: state.mergeIn(['comments'], commentsObject).set('isFetching', false)
+	        };
+	      case 'POSTING_COMMENT':
+	        return {
+	          v: state.set('isFetching', true)
+	        };
+	    }
+	  }();
+
+	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	  return state;
+	}
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\JeremyD\\picture-redux-app\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentReducer.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);

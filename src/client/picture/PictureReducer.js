@@ -15,7 +15,7 @@ export default function pictureReducer(state = initialState, action) {
         newPicture[action.picture._id] = action.picture;
         return Object.assign(pictures, newPicture);
       })
-      .set('isFetching', true);
+      .set('isFetching', false);
     case 'REQUEST_PICTURES':
       return state.set('isFetching', true);
     case 'RECEIVE_PICTURES':

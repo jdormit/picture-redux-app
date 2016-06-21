@@ -1,4 +1,4 @@
-export const getComments(picture_id) {
+export function getComments(picture_id) {
   return function(dispatch) {
     dispatch(requestComments());
     return fetch(`/api/comment/${picture_id}`)
@@ -8,25 +8,25 @@ export const getComments(picture_id) {
   }
 }
 
-export const addComment(comment) {
+export function addComment(comment) {
   type: 'ADD_COMMENT',
   comment
 }
 
-export const requestComments() {
+export function requestComments() {
   return {
     type: 'REQUEST_COMMENTS'
   };
 }
 
-export const receiveComments(comments) {
+export function receiveComments(comments) {
   return {
     type: 'RECEIVE_COMMENTS',
     comments
   };
 }
 
-export const postComment(comment) {
+export function postComment(comment) {
   return function(dispatch) {
     dispatch(postingComment());
     return fetch('/api/comment', {
@@ -39,7 +39,7 @@ export const postComment(comment) {
   }
 }
 
-export const postingComment() {
+export function postingComment() {
   return {
     type: 'POSTING_COMMENT'
   };

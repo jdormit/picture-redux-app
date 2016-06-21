@@ -17,7 +17,7 @@ export const PictureFeed = React.createClass({
             <img src={this.props.pictures[picture_id].url} alt={this.props.pictures[picture_id].title} width="256" height="192" />
           </a>
         </div>
-      )};
+      )}
       </div>
     );
   }
