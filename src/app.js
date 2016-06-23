@@ -5,7 +5,7 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import './config';
-import routes from './routes';
+import routes from './server/routes';
 
 const port = process.env.PORT || 8080;
 const mongoUrl = "mongodb://localhost:27017/picture-redux-app";

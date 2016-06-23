@@ -14,7 +14,6 @@ export function addPicture(picture) {
 }
 
 export function postPicture(picture) {
-  console.log('posting a new picture');
   return function(dispatch) {
     dispatch(postingPicture());
     return fetch('/api/picture', {

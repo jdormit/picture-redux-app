@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 export function getComments(picture_id) {
   return function(dispatch) {
     dispatch(requestComments());
@@ -9,8 +11,10 @@ export function getComments(picture_id) {
 }
 
 export function addComment(comment) {
-  type: 'ADD_COMMENT',
-  comment
+  return {
+    type: 'ADD_COMMENT',
+    comment
+  }
 }
 
 export function requestComments() {
@@ -33,9 +37,9 @@ export function postComment(comment) {
       method: 'POST',
       body: comment
     })
-    .then(response => {
-      dispatch(addComment(response));
-    });
+    .then(response => response.json().then(comment => {
+      dispatch(addComment(comment));
+    }));
   }
 }
 

@@ -38,3 +38,5 @@ jspm_packages
 
 .tern-project
 test.js
+lib/
+public/bundle*
