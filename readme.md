@@ -4,13 +4,13 @@ Some notes:
 Starting the Server:
 -------------------
 
-`npm start` will start the server at the entry point, `./lib/index.js`, assuming `npm build` has already been run.
+`npm start` will start the server at the entry point, `./lib/server.js`, assuming `npm build` has already been run.
 The server assumes that a local instance of of MongoDB is running. Get Mongo [here](https://www.mongodb.com/) and run it with `mongod`.
 
-Build Process / Using Babel
+Build Process
 ---------------------------
 
-`npm run build` will run the client-side webpack build process and the server-side babel build process. Client code will end up in `./public/bundle.js`, and server code will end up in `./lib`. `npm run build:watch` will start the babel and webpack watch utilities, reloading code as it is changed. Since the server is started with [nodemon](http://nodemon.io/) and the webpack hot-reloader is used to watch the client-side code, changes to both server-side and client-side code will be hot-reloaded into the running app.
+`npm run build` will run the webpack build process. Client-side code will get bundled to `public/bundle.js` and server-side code will be bundled to `lib/server.js`. Both client and server code are bundled with source maps, so Node stack traces and the chrome debugger will refer to the source code, not the bundled code. React hot-reloader is not set up, but including it in the build process would be trivial. Webpack is configured using Babel to transpile es6 syntax.
 
 REST API
 --------
@@ -35,29 +35,32 @@ The client side application state is stored in a map called the store. Here is i
 
 ```javascript
 {
-  user: {
-    username: String
+  pictureState: {
+    pictures: [
+      pictureId: {
+        _id: String,
+        url: String,
+        title: String,
+        caption: String,
+        postedBy: String,
+        datePosted: Date
+      },
+      ...
+    ],
+    isFetching: Boolean
   },
-  pictures: [
-    pictureId: {
-      url: String,
-      title: String,
-      caption: String,
-      postedBy: String,
-      datePosted: Date
-    },
-    ...
+  commentState: {
+    comments: [
+      commentId: {
+        _id: String,
+        text: String,
+        datePosted: Date,
+        postedBy: String,
+        _picture: ObjectId
+      },
+      ...
+    ],
     isFetching: Boolean
-  ],
-  comments: [
-    commentId: {
-      text: String,
-      datePosted: Date,
-      postedBy: String,
-      _picture: ObjectId
-    },
-    ...
-    isFetching: Boolean
-  ]
+  }
 }
 ```
