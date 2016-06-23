@@ -13,7 +13,7 @@ export default function pictureReducer(state = initialState, action) {
       return state.update('pictures', (pictures) => {
         let newPicture = {};
         newPicture[action.picture._id] = action.picture;
-        return Object.assign(pictures, newPicture);
+        return Object.assign({}, pictures, newPicture);
       })
       .set('isFetching', false);
     case 'REQUEST_PICTURES':

@@ -11,9 +11,9 @@ export default function commentReducer(state = initialState, action) {
       return state.update('comments', (comments) => {
         let newComment = {};
         newComment[action.comment._id] = action.comment;
-        return Object.assign(comments, newComment);
-      })
-      .set('isFetching', false);
+        return Object.assign({}, comments, newComment);
+      });
+      //.set('isFetching', false);
     case 'REQUEST_COMMENTS':
       return state.set('isFetching', true);
     case 'RECEIVE_COMMENTS':
