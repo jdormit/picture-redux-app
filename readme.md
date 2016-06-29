@@ -10,7 +10,7 @@ The server assumes that a local instance of of MongoDB is running. Get Mongo [he
 Build Process
 ---------------------------
 
-`npm run build` will run the webpack build process. Client-side code will get bundled to `public/bundle.js` and server-side code will be bundled to `lib/server.js`. Both client and server code are bundled with source maps, so Node stack traces and the chrome debugger will refer to the source code, not the bundled code. React hot-reloader is not set up, but including it in the build process would be trivial. Webpack is configured using Babel to transpile es6 syntax.
+`npm run build` will run the webpack build process. Client-side code will get bundled to `public/bundle.js` and server-side code will be bundled to `lib/server.js`. Both client and server code are bundled with source maps, so Node stack traces and the chrome debugger will refer to the source code, not the bundled code. Webpack is configured using Babel to transpile es6 syntax.
 
 REST API
 --------
