@@ -9,7 +9,7 @@ export const Picture = React.createClass({
   },
   render: function() {
     return (
-        <div>
+      <div>
         <h2>{this.props.picture.title}</h2>
         <img src={this.props.picture.url} alt={this.props.picture.title} height={this.props.picture.height} width={this.props.picture.width} />
         <p>{this.props.picture.caption}</p>
